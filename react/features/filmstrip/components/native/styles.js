@@ -78,12 +78,12 @@ export default {
         borderStyle: 'solid',
         borderWidth: 1,
         flex: 1,
-        height: 80,
+        height: 130,
         justifyContent: 'center',
         margin: 2,
         overflow: 'hidden',
         position: 'relative',
-        width: 80
+        width: 130
     },
 
     /**

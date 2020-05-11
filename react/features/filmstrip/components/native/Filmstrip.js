@@ -120,7 +120,7 @@ class Filmstrip extends Component<Props> {
                             && !isNarrowAspectRatio_
                             && <LocalThumbnail />
                     }
-                    {
+                    {/* {
 
                         this._sort(
                                 this.props._participants,
@@ -130,7 +130,7 @@ class Filmstrip extends Component<Props> {
                                     key = { p.id }
                                     participant = { p } />))
 
-                    }
+                    } */}
                     {
                         !this._separateLocalThumbnail
                             && isNarrowAspectRatio_
