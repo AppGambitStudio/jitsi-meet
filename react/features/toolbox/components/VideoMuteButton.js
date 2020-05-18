@@ -23,6 +23,9 @@ import {
     isPrejoinVideoMuted
 } from '../../prejoin';
 import UIEvents from '../../../../service/UI/UIEvents';
+import { NativeModules } from 'react-native';
+
+let ConnectionService = NativeModules.ConnectionService;
 
 declare var APP: Object;
 
@@ -156,6 +159,13 @@ class VideoMuteButton extends AbstractVideoMuteButton<Props, *> {
      * @returns {void}
      */
     _setVideoMuted(videoMuted: boolean) {
+        if (ConnectionService) {
+            if (videoMuted) {
+                ConnectionService.muteVideo();
+            } else {
+                ConnectionService.unMuteVideo();
+            }
+        }
         sendAnalytics(createToolbarEvent(VIDEO_MUTE, { enable: videoMuted }));
         if (this.props._audioOnly) {
             this.props.dispatch(
