@@ -14,5 +14,6 @@ export function isToolboxVisible(stateful: Object | Function) {
     const { alwaysVisible, enabled, visible } = state['features/toolbox'];
     const { length: participantCount } = state['features/base/participants'];
 
-    return enabled && (alwaysVisible || visible || participantCount === 1);
+    // return enabled && (alwaysVisible || visible || participantCount === 1);
+    return true;
 }

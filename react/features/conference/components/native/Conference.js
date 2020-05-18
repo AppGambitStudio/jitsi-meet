@@ -184,7 +184,8 @@ class Conference extends AbstractConference<Props, *> {
      * @returns {void}
      */
     _onClick() {
-        this._setToolboxVisible(!this.props._toolboxVisible);
+        // this._setToolboxVisible(!this.props._toolboxVisible);
+        this._setToolboxVisible(true);
     }
 
     _onHardwareBackPress: () => boolean;

@@ -23,9 +23,11 @@ import androidx.annotation.Nullable;
 import com.facebook.hermes.reactexecutor.HermesExecutorFactory;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactPackage;
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.common.LifecycleState;
 import com.facebook.react.devsupport.DevInternalSettings;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
@@ -71,6 +73,7 @@ class ReactInstanceManagerHolder {
                 new PictureInPictureModule(reactContext),
                 new ProximityModule(reactContext),
                 new WiFiStatsModule(reactContext),
+                new VideoApiCall(reactContext),
                 new org.jitsi.meet.sdk.net.NAT64AddrInfoModule(reactContext)));
 
         if (AudioModeModule.useConnectionService()) {
@@ -130,6 +133,14 @@ class ReactInstanceManagerHolder {
                     .emit(eventName, data);
             }
         }
+    }
+
+    public static void onStartVideoRequest(Boolean isVideoStart){
+        // Create map for params
+        WritableMap payload = Arguments.createMap();
+        // Put data to map
+        payload.putBoolean("isVideoStartBool", isVideoStart);
+        emitEvent("isVideoStart",payload);
     }
 
     /**

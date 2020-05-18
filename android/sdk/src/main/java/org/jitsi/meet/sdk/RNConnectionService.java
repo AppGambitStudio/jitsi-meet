@@ -193,16 +193,6 @@ class RNConnectionService extends ReactContextBaseJavaModule {
         ConnectionService.updateCall(callUUID, callState);
     }
 
-    @ReactMethod
-    public void muteVideo() {
-        JitsiMeetLogger.i("Video Muted: ");
-    }
-
-    @ReactMethod
-    public void unMuteVideo() {
-        JitsiMeetLogger.i("Video UnMuted: ");
-    }
-
 
     public CallAudioStateListener getCallAudioStateListener() {
         return callAudioStateListener;

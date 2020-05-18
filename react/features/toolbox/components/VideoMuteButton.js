@@ -23,9 +23,9 @@ import {
     isPrejoinVideoMuted
 } from '../../prejoin';
 import UIEvents from '../../../../service/UI/UIEvents';
-import { NativeModules } from 'react-native';
+import { NativeModules, DeviceEventEmitter } from 'react-native';
 
-let ConnectionService = NativeModules.ConnectionService;
+let VideoApiCall = NativeModules.VideoApiCall;
 
 declare var APP: Object;
 
@@ -96,6 +96,11 @@ class VideoMuteButton extends AbstractVideoMuteButton<Props, *> {
                 null,
                 this._onKeyboardShortcut,
                 'keyboardShortcuts.videoMute');
+
+        this.videoStartListner = DeviceEventEmitter.addListener('isVideoStart', event => {
+            console.log(event.isVideoStartBool); // "someValue";
+            this._setVideoMuted(event.isVideoStartBool, true);
+        });
     }
 
     /**
@@ -107,6 +112,8 @@ class VideoMuteButton extends AbstractVideoMuteButton<Props, *> {
     componentWillUnmount() {
         typeof APP === 'undefined'
             || APP.keyboardshortcut.unregisterShortcut('V');
+
+        this.videoStartListner.remove();
     }
 
     /**
@@ -158,12 +165,14 @@ class VideoMuteButton extends AbstractVideoMuteButton<Props, *> {
      * @protected
      * @returns {void}
      */
-    _setVideoMuted(videoMuted: boolean) {
-        if (ConnectionService) {
-            if (videoMuted) {
-                ConnectionService.muteVideo();
-            } else {
-                ConnectionService.unMuteVideo();
+    _setVideoMuted(videoMuted: boolean, isFromDid = false) {
+        if (!isFromDid) {
+            if (VideoApiCall) {
+                if (videoMuted) {
+                    VideoApiCall.muteVideo();
+                } else {
+                    VideoApiCall.unMuteVideo();
+                }
             }
         }
         sendAnalytics(createToolbarEvent(VIDEO_MUTE, { enable: videoMuted }));

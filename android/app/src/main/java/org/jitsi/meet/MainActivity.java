@@ -16,7 +16,10 @@
 
 package org.jitsi.meet;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
@@ -47,6 +50,52 @@ public class MainActivity extends JitsiMeetActivity {
      */
     private static final int OVERLAY_PERMISSION_REQUEST_CODE
         = (int) (Math.random() * Short.MAX_VALUE);
+
+    private MyReceiver myReceiver;
+
+
+    private class MyReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            boolean isVideoStart = intent.getBooleanExtra("callVideoApi", false);
+            Log.d("test callVideoApi", Boolean.toString(isVideoStart));
+            try {
+                if (isVideoStart) {
+                    //      JitsiMeetActivityDelegate.onVideoStart();
+
+                } else {
+                    //       JitsiMeetActivityDelegate.onVideoStop();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void setReceiver() {
+        myReceiver = new MyReceiver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("callVideoApi");
+        registerReceiver(myReceiver, intentFilter);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        setReceiver();
+    }
+
+    @Override
+    protected void onStop() {
+        try {
+            if (myReceiver != null)
+                unregisterReceiver(myReceiver);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        super.onStop();
+    }
 
     // JitsiMeetActivity overrides
     //

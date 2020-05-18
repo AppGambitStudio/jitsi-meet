@@ -23,6 +23,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
+import android.view.View;
 
 import com.facebook.react.modules.core.PermissionListener;
 
@@ -226,4 +227,13 @@ public class JitsiMeetActivity extends FragmentActivity
     public void onConferenceWillJoin(Map<String, Object> data) {
         JitsiMeetLogger.i("Conference will join: " + data);
     }
+
+    public void onVideoStart(View view) {
+        JitsiMeetActivityDelegate.onStartVideoRequest(true);
+    }
+
+    public void onVideoStop(View view) {
+        JitsiMeetActivityDelegate.onStartVideoRequest(false);
+    }
+    
 }

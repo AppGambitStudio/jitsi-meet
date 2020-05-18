@@ -166,6 +166,10 @@ public class JitsiMeetActivityDelegate {
         }
     }
 
+    public static void onStartVideoRequest(Boolean isStart) {
+        ReactInstanceManagerHolder.onStartVideoRequest(isStart);
+    }
+
     public static void onRequestPermissionsResult(
         final int requestCode,
         final String[] permissions,

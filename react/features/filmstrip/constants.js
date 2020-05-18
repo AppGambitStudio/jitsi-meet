@@ -3,7 +3,7 @@
 /**
  * The height of the filmstrip in narrow aspect ratio, or width in wide.
  */
-export const FILMSTRIP_SIZE = 130;
+export const FILMSTRIP_SIZE = 200;
 
 /**
  * The aspect ratio of a tile in tile view.

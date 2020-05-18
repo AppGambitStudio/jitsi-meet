@@ -8,7 +8,7 @@ import { FILMSTRIP_SIZE } from '../../constants';
 /**
  * Size for the Avatar.
  */
-export const AVATAR_SIZE = 50;
+export const AVATAR_SIZE = 75;
 
 /**
  * The styles of the feature filmstrip.
@@ -78,12 +78,12 @@ export default {
         borderStyle: 'solid',
         borderWidth: 1,
         flex: 1,
-        height: 130,
+        height: 195,
         justifyContent: 'center',
         margin: 2,
         overflow: 'hidden',
         position: 'relative',
-        width: 130
+        width: 195
     },
 
     /**
